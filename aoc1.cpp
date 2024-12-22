@@ -6,23 +6,15 @@
 
 // ADVENT OF CODE DAY 1
 int main() {
-	std::ifstream file("../input.txt");
 
-	// Assert file
-	if (!file.is_open()) {
-		std::cerr << "Error: could not open file" << std::endl;
-		return 1;
-	}
-
+	// Initialize the vectors
 	std::vector<int> left;
 	std::vector<int> right;
 
 	std::string line;
-	int counter = 0;
-	while (std::getline(file, line)) {
+	while (std::getline(std::cin, line)) {
 		std::istringstream iss(line);
 		int leftNum, rightNum;
-		counter += 1;
 
 		if (iss >> leftNum >> rightNum) {
 
@@ -34,8 +26,6 @@ int main() {
 			return 1;
 		}
 	}
-	file.close();
-	//std::cout << "Counter: " << counter << std::endl;
 
 	// Sort the vectors
 	std::sort(left.begin(), left.end());
@@ -48,6 +38,8 @@ int main() {
 	}
 	std::cout << "Difference: " << difference << std::endl;
 
+	// Count each instance of an element in the right vector
+	// and save it in a hash table
 	std::unordered_map<int, int> rightMap;
 	for (int i = 0; i < right.size(); i++) {
 		rightMap[right[i]]++;

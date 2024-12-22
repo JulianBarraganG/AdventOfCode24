@@ -1,4 +1,7 @@
-cmake_minimum_required(VERSION 3.16)
-project(aoc24-part1.1)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
+PROJECT(aoc24-part1.1)
 
-add_executable(${PROJECT_NAME} aoc1.cpp)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+ADD_EXECUTABLE(${PROJECT_NAME} aoc1.cpp)
+
+
