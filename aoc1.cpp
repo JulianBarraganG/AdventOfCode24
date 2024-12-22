@@ -48,21 +48,17 @@ int main() {
 	}
 	std::cout << "Difference: " << difference << std::endl;
 
-	// Calculate similarity
-	long long similarity = 0;
-	for (int i = 0; i < left.size(); i++) {
-		int current_counter = 0;
-		for (int j = 0; j < left.size(); j++) {
-			if (left[i] == right[j]) {
-				current_counter += 1;
-			}
-		
-		}
-	similarity += static_cast<long long>(current_counter) * left[i];
+	std::unordered_map<int, int> rightMap;
+	for (int i = 0; i < right.size(); i++) {
+		rightMap[right[i]]++;
 	}
-	std::cout << "Similarity: " << similarity << std::endl;
 
-	
+	int similarity = 0;
+	for (int i = 0; i < left.size(); i++) {
+		similarity += left[i] * rightMap[left[i]];
+	}
+
+	std::cout << "Similarity: " << similarity << std::endl;
 
 	return 0;
 }
