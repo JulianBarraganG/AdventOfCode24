@@ -4,6 +4,27 @@
 #include<string>
 #include<bits/stdc++.h>
 
+bool safe_row(std::vector<int> row) {
+	int k = row.size();
+	bool is_safe = true;	
+	bool ascending = true;
+	bool descending = true;
+	for (int j = 0; j < (k - 1); j++) {
+		int diff =row[j] - row[j+1];
+		if (diff > 0) {
+			ascending = false;
+		}
+		if (diff < 0) {
+			descending = false;
+		}
+		if (std::abs(diff) > 3 || std::abs(diff) == 0) {
+			is_safe = false;
+			break; 
+		}
+	}
+	return (is_safe && (ascending || descending));	
+}
+
 int main() {
 
 	std::vector<std::vector<int>> table;
@@ -20,35 +41,10 @@ int main() {
 		row.clear();
 	}	
 	int num_safe = 0; // int defaults to 0
-	for (int i = 0; i < table.size(); i++) {
-		bool is_safe = true;	
-		bool ascending = true;
-		if (table[i][0] == table[i][1]) {
-			is_safe = false;
-		}
-		else if (table[i][0] > table[i][1]) {
-			ascending = false;
-		}
-		if (ascending) {
-			for (int j = 0; j < (table[i].size() - 1); j++) {
-				if (((table[i][j] - table[i][j+1]) < -3) 
-						|| (table [i][j] >= table[i][j+1])) {
-					is_safe = false;
-					break; 
-				}
-			}
-		}
-		else {
-			for (int j = 0; j < (table[i].size() - 1); j++) {
-				if (((table[i][j] - table[i][j+1]) > 3) 
-						|| (table [i][j] <= table[i][j+1])) {
-					is_safe = false;
-					break; 
-				}
-			}
-		}
-		if (is_safe) { 
-			num_safe++; 
+	int n = table.size();
+	for (int i = 0; i < n; i++) {
+		if (safe_row(table[i])) {
+			num_safe++;
 		}
 	}
 
